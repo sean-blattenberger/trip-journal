@@ -7,6 +7,8 @@ const morgan = require("morgan");
 const cors = require("cors");
 const app = express();
 const port = parseInt(process.env.PORT || 3000);
+const router = module.exports = require('express').Router();
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -17,7 +19,7 @@ app.use("/", express.static("./build"));
 
 // TODO: ADD (MOUNT) YOUR MIDDLEWARE (ROUTES) HERE:
 // Example:
-app.use('/api/cat', require('./routes/cat'))
+app.use('/api/trips', require('./routes/trips'))
 
 // These 2 `app.use` MUST be last `.use`'s
 app.use(notFound);

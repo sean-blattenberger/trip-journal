@@ -6,15 +6,18 @@
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
     "express": "^4.16.3",
+    "material-icons-react": "^1.0.0",
     "morgan": "^1.9.0",
     "nodemon": "^1.17.4",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
+    "react-materialize": "^2.2.1",
     "react-scripts": "1.1.4",
     "styled-components": "^3.2.6"
   },
   "scripts": {
     "start": "react-scripts start",
+    "dev": "nodemon /src/server.js",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
