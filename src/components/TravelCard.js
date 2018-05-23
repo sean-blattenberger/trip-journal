@@ -4,7 +4,7 @@ import { Card, Col } from "react-materialize";
 class TravelCard extends React.Component {
   render() {
     return (
-      <Col m={6} s={12}>
+      <Col m2={3} s={12}>
         <Card
           className="blue-grey darken-4 white-text"
           textClassName="red-text text-lighten-2"
