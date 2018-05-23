@@ -10,8 +10,8 @@ class TravelCard extends React.Component {
           textClassName="red-text text-lighten-2"
           title={
             <div className="white-text">
-              {`${this.props.trip.destination.city}, ${
-                this.props.trip.destination.state
+              {`${this.props.trip.city}, ${
+                this.props.trip.state
                 }`}
             </div>
           }
@@ -21,7 +21,7 @@ class TravelCard extends React.Component {
             </a>
           ]}
         >
-          {this.props.trip.date}
+          {this.props.trip.date.toString().split("T")[0]}
         </Card>
       </Col>
     );
