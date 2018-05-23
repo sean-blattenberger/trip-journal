@@ -19,8 +19,8 @@
     "styled-components": "^3.2.6"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "dev": "nodemon /src/server.js",
+    "start": "nodemon src/server.js",
+    "dev": "nodemon src/server.js",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
