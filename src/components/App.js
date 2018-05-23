@@ -45,7 +45,7 @@ class App extends Component {
     this.readData();
   }
   readData = () => {
-    fetch('http://localhost:3000/api/trips').then(res => res.json()).then(trips => {
+    fetch('https://warm-atoll-11937.herokuapp.com/api/trips').then(res => res.json()).then(trips => {
       this.setState({ trips })
     });
   }
