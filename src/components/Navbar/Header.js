@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Navbar, NavItem, Icon } from "react-materialize";
 
 const Header = () => {
+
   return (
     <div className="navbar-fixed" >
       <Navbar
