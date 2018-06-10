@@ -8,6 +8,7 @@ const cors = require("cors");
 const app = express();
 const port = parseInt(process.env.PORT || 3000);
 const router = module.exports = require('express').Router();
+const path = require('path')
 
 
 app.use(bodyParser.json());
@@ -20,10 +21,13 @@ app.use("/", express.static("./build"));
 // TODO: ADD (MOUNT) YOUR MIDDLEWARE (ROUTES) HERE:
 // Example:
 app.use('/api/trips', require('./routes/trips'))
+app.get('*', function (request, response, next) {
+  response.sendfile(path.resolve('./build/index.html'));
+});
 
 // These 2 `app.use` MUST be last `.use`'s
-app.use(notFound);
-app.use(errorHandler);
+// app.use(notFound);
+// app.use(errorHandler);
 
 function notFound(req, res, next) {
   const url = req.originalUrl;

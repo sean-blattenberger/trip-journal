@@ -1,5 +1,6 @@
 import React from "react";
 import { Card, Col } from "react-materialize";
+import { Link } from 'react-router-dom';
 
 class TravelCard extends React.Component {
   render() {
@@ -8,17 +9,17 @@ class TravelCard extends React.Component {
         <Card
           className="blue-grey darken-4 white-text"
           textClassName="red-text text-lighten-2"
-          title={
+          title={[
             <div className="white-text">
               {`${this.props.trip.city}, ${
                 this.props.trip.state
                 }`}
             </div>
-          }
+          ]}
           actions={[
-            <a key={this.props.trip.id} className="light-blue-text" href={`/trips/${this.props.trip.id}`}>
-              View your trip journal
-            </a>
+              <Link key={this.props.trip.id} className="light-blue-text" to={`/trips/${this.props.trip.id}`}>
+                View your trip journal
+              </Link>
           ]}
         >
           {this.props.trip.date.toString().split("T")[0]}

@@ -7,3 +7,52 @@ body {
 #sidenav-overlay {
   z-index: 1;
 }
+.large-card {
+  height: 80%
+}
+
+Button {
+  margin: 1rem;
+
+}
+Button:hover {
+  filter: opacity(85%);
+}
+
+Input {
+  color: white;
+}
+
+.form-toggle {
+  width: 100%;
+}
+
+.form-row {
+  margin-left: 10px;
+}
+
+ /* label focus color */
+
+ .input-field input[type=text]:focus+label {
+   color: #000;
+ }
+
+ /* label underline focus color */
+
+ .input-field input[type=text]:focus {
+   border-bottom: 1px solid #03a9f4;
+   box-shadow: 0 1px 0 0 #03a9f4;
+ }
+
+  /* label focus color */
+
+  .input-field input[type=text]:focus+label {
+    color: #03a9f4;
+  }
+
+  /* label underline focus color */
+
+  .input-field input[type=text]:focus {
+    border-bottom: 1px solid #03a9f4;
+    box-shadow: 0 1px 0 0 #03a9f4;
+  }
