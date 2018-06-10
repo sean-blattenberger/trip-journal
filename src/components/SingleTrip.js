@@ -1,8 +1,7 @@
 import React from "react";
 import { Row, Col, Card, Button, Icon, Input } from "react-materialize";
 import Header from "./Navbar/Header";
-import { Link } from "react-router-dom";
-
+const baseUrl = `https://warm-atoll-11937.herokuapp.com/api/trips/`;
 class SingleTrip extends React.Component {
   state = {
     trip: [],
@@ -17,31 +16,45 @@ class SingleTrip extends React.Component {
   };
   getSingleTrip = () => {
     let url = window.location.href.split("/");
-    fetch(
-      `https://warm-atoll-11937.herokuapp.com/api/trips/${url[url.length - 1]}`
-    )
+    fetch(`${baseUrl}${url[url.length - 1]}`)
       .then(res => res.json())
       .then(trip => {
         this.setState({ trip });
       });
   };
-  updateTrip = event => {
-    event.preventDefault();
-    fetch(`https://warm-atoll-11937.herokuapp.com/api/trips/${this.state.trip.id}`, {
-      method: "PUT",
-      headers: {
-        "content-type": "application/json"
-      },
-      body: JSON.stringify(this.state.trip)
+  deleteTrip = () => {
+    fetch(`${baseUrl}${this.state.trip.id}`, {
+      method: "DELETE"
     })
       .then(res => res.json())
-      .then(data => {
-        console.log(data);
+      .catch(error => console.error("Error:", error))
+      .then(response => {
+        console.log("Success:", response);
+        window.location =
+          "http://localhost:3000/" || "https://warm-atoll-11937.herokuapp.com/";
+      });
+  };
+  updateTrip = event => {
+    event.preventDefault();
+    console.log(this.state.trip);
+    fetch(`${baseUrl}${this.state.trip.id}`, {
+      method: "PUT",
+      body: JSON.stringify(this.state.trip),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then(res => res.json())
+      .catch(error => console.error("Error:", error))
+      .then(response => {
+        console.log("Success:", response);
         this.setState({ updateForm: false });
       });
   };
   handleChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
+    let newTrip = { ...this.state.trip };
+    newTrip[event.target.name] = event.target.value;
+    this.setState({ trip: newTrip });
   };
   render() {
     return (

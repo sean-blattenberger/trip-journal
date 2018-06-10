@@ -15,8 +15,10 @@ class CollapseForm extends React.Component {
   };
   addTrip = (event) => {
     event.preventDefault();
-    console.log('Submit: this.state: ', this.state);
     this.props.addNewTrip(this.state);
+    document.getElementById("collapse-form").reset();
+    this.setState({ showForm: false });
+    window.location.reload();
   };
   handleChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
@@ -33,7 +35,7 @@ class CollapseForm extends React.Component {
         </Button>
         {this.state.showForm ? (
           <Row className="form-row">
-            <form onSubmit={this.addTrip}>
+            <form id="collapse-form" onSubmit={this.addTrip}>
               <Input
                 onChange={this.handleChange}
                 name="city"
