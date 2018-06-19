@@ -3,6 +3,7 @@ const router = express.Router();
 const queries = require("../../queries");
 
 router.get("/", (req, res) => {
+  console.log('TRIPS')
   queries.list().then(trips => res.json(trips));
 });
 

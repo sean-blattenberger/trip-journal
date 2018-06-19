@@ -7,7 +7,7 @@ class TravelCards extends React.Component {
     return (
       <Row>
         {this.props.trips.map((trip, i) => {
-          return (<TravelCard key={trip.id} trip={trip} />)
+          return (<TravelCard key={i} trip={trip} />)
         })}
       </Row>
     );

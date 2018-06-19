@@ -1,10 +1,11 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import { Navbar, NavItem, Icon } from "react-materialize";
 
 const Header = () => {
   return (
-    <div className="navbar-fixed" >
+    <div className="navbar-fixed">
       <Navbar
         className="navbar-fixed blue-grey darken-4"
         brand={
@@ -14,16 +15,18 @@ const Header = () => {
         }
         right
       >
-        <NavItem href="get-started.html">
+        <NavItem>
           <Icon className="light-blue-text">search</Icon>
         </NavItem>
-        <NavItem href="get-started.html">
-          <Icon className="light-blue-text">view_module</Icon>
+        <NavItem>
+          <Link to="/">
+            <Icon className="light-blue-text">view_module</Icon>
+          </Link>
         </NavItem>
-        <NavItem href="get-started.html">
+        <NavItem onClick={() => window.location.reload()}>
           <Icon className="light-blue-text">refresh</Icon>
         </NavItem>
-        <NavItem href="get-started.html">
+        <NavItem>
           <Icon className="light-blue-text">more_vert</Icon>
         </NavItem>
       </Navbar>
