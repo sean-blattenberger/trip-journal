@@ -4,7 +4,16 @@ import Header from "./Navbar/Header";
 const baseUrl = `https://warm-atoll-11937.herokuapp.com/api/trips/`;
 class SingleTrip extends React.Component {
   state = {
-    trip: [],
+    trip: {
+      id: "",
+      city: "",
+      state: "",
+      notes: [
+        {
+          name: ""
+        }
+      ]
+    },
     updateForm: false
   };
   componentDidMount() {
@@ -20,6 +29,7 @@ class SingleTrip extends React.Component {
       .then(res => res.json())
       .then(trip => {
         this.setState({ trip });
+        console.log(this.state.trip.notes[0]['name']);
       });
   };
   deleteTrip = () => {
@@ -47,7 +57,6 @@ class SingleTrip extends React.Component {
       .then(res => res.json())
       .catch(error => console.error("Error:", error))
       .then(response => {
-        console.log("Success:", response);
         this.setState({ updateForm: false });
       });
   };
@@ -138,7 +147,14 @@ class SingleTrip extends React.Component {
                 {this.state.trip.date ? this.state.trip.date.split("T")[0] : ""}
                 <article>
                   <div className="divider" />
-                  <div className="light-blue-text">{this.state.trip.notes}</div>
+                  <div className="light-blue-text">
+                      {this.state.trip
+                        ?
+                        this.state.trip.notes[0]['name']
+                        :
+                        ''
+                        }
+                  </div>
                 </article>
               </Card>
             </Col>
