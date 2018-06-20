@@ -36,6 +36,11 @@ module.exports = {
     return database("trips")
       .select()
       .where("id", id)
-      .del();
+      .del()
+      .then(trip => {
+        return database("note")
+          .where("trip_id", id)
+          .del()
+    })
   }
 };

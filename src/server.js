@@ -17,6 +17,7 @@ app.use("/", express.static("./build"));
 
 
 app.use('/api/trips', require('./routes/trips'))
+app.use('/api/notes', require('./routes/notes'))
 app.get('*', function (request, response, next) {
   response.sendfile(path.resolve('./build/index.html'));
 });
