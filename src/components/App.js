@@ -19,22 +19,14 @@ class App extends Component {
         this.setState({ trips });
       });
   };
-  // deleteSingleTrip = () => {
-  //   fetch(`https://warm-atoll-11937.herokuapp.com/api/trips/${id}`, {
-  //     method: "DELETE"
-  //   }).then(data => {
-  //     console.log(data);
-  //   });
-  // };
   addNewTrip = newTrip => {
-    console.log(newTrip);
     let trip = {
       city: newTrip.city,
       state: newTrip.state,
       date: newTrip.date,
       notes: newTrip.notes
     };
-    fetch("https://warm-atoll-11937.herokuapp.com/api/trips", {
+    return fetch("https://warm-atoll-11937.herokuapp.com/api/trips", {
       method: "POST",
       headers: {
         "content-type": "application/json"
@@ -53,9 +45,14 @@ class App extends Component {
     return (
       <div className="App">
         <Header />
-        <TravelCards updateCurrentTrip={this.updateCurrentTrip} trips={this.state.trips} />
+        <div className="card-container">
+          <TravelCards
+            updateCurrentTrip={this.updateCurrentTrip}
+            trips={this.state.trips}
+          />
+        </div>
         <Row>
-          <CollapseForm addNewTrip={this.addNewTrip} />
+          <CollapseForm readData={this.readData} addNewTrip={this.addNewTrip} />
         </Row>
       </div>
     );

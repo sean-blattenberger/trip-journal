@@ -1,7 +1,16 @@
 import React from "react";
-import { Row, Col, Card, Button, Icon, Input } from "react-materialize";
+import {
+  Row,
+  Col,
+  Card,
+  Button,
+  Icon,
+  Input,
+  Collection,
+  CollectionItem
+} from "react-materialize";
 import Header from "./Navbar/Header";
-const baseUrl = `https://warm-atoll-11937.herokuapp.com/api/trips/`;
+const baseUrl = `https://warm-atoll-11937.herokuapp.com/api/`;
 class SingleTrip extends React.Component {
   state = {
     trip: {
@@ -10,11 +19,21 @@ class SingleTrip extends React.Component {
       state: "",
       notes: [
         {
-          name: ""
+          id: "",
+          name: "",
+          type: "",
+          note: ""
         }
       ]
     },
-    updateForm: false
+    updateForm: false,
+    noteForm: false,
+    newNote: {
+      id: "",
+      name: "",
+      type: "",
+      note: ""
+    }
   };
   componentDidMount() {
     this.getSingleTrip();
@@ -23,13 +42,15 @@ class SingleTrip extends React.Component {
     let formStatus = this.state.updateForm ? false : true;
     this.setState({ updateForm: formStatus });
   };
+  loadNoteForm = () => {
+    this.setState({ noteForm: true })
+  }
   getSingleTrip = () => {
     let url = window.location.href.split("/");
-    fetch(`${baseUrl}${url[url.length - 1]}`)
+    fetch(`${baseUrl}trips/${url[url.length - 1]}`)
       .then(res => res.json())
       .then(trip => {
         this.setState({ trip });
-        console.log(this.state.trip.notes[0]['name']);
       });
   };
   deleteTrip = () => {
@@ -65,6 +86,20 @@ class SingleTrip extends React.Component {
     newTrip[event.target.name] = event.target.value;
     this.setState({ trip: newTrip });
   };
+  deleteNote = (id) => {
+    return fetch(`${baseUrl}notes/${id}`, {
+      method: "DELETE"
+    })
+      .then(res => res.json())
+      .catch(error => console.error("Error:", error))
+      .then(response => {
+        console.log("Success:", response);
+        this.getSingleTrip();
+      });
+  }
+  handleNote = event => {
+
+  }
   render() {
     return (
       <React.Fragment>
@@ -99,7 +134,7 @@ class SingleTrip extends React.Component {
                 <Input
                   onChange={this.handleChange}
                   name="notes"
-                  defaultValue={this.state.trip.notes}
+                  defaultValue={this.state.trip.notes.map(note => " " + note.note)}
                   label="Notes"
                   s={12}
                 />
@@ -118,7 +153,7 @@ class SingleTrip extends React.Component {
           ) : (
             <Col offset="m2" m={8} s={12}>
               <Card
-                className="large blue-grey darken-4 white-text"
+                className="blue-grey darken-4 white-text"
                 textClassName="red-text text-lighten-2"
                 title={[
                   <div className="white-text">
@@ -147,15 +182,34 @@ class SingleTrip extends React.Component {
                 {this.state.trip.date ? this.state.trip.date.split("T")[0] : ""}
                 <article>
                   <div className="divider" />
-                  <div className="light-blue-text">
-                      {this.state.trip
-                        ?
-                        this.state.trip.notes[0]['name']
-                        :
-                        ''
-                        }
-                  </div>
                 </article>
+                <Collection className="trip-notes">
+                  {this.state.trip.notes.map(singleNote => {
+                    return (
+                      <CollectionItem className="blue-grey darken-4">
+                        <div className="light-blue-text thin note-header">{`${
+                          singleNote.type
+                        }:  ${singleNote.name}`}</div>
+                        <p className="white-text thin">{singleNote.note}</p>
+                        <div className="right" onClick={() => this.deleteNote(singleNote.id)} style={{"margin-top": "-40px"}}>
+                          <Icon right>delete</Icon>
+                        </div>
+                      </CollectionItem>
+                    );
+                  })}
+                  </Collection>
+                  {
+                    this.state.noteForm
+                    ?
+                    <Row>
+                        <Input name="type" value={this.state.newNote.type} placeholder="ex. Restaurant" s={6} label="Type" />
+                        <Input name="name" value={this.state.newNote.name} s={6} label="Place Name" />
+                        <Input s={12} value={this.state.newNote.note} name="note" label="Enter place note here" />
+                        <Button floating className='red lighten-2 light-blue-text' waves='light' icon='add' onClick={this.postNote}/>
+                    </Row>
+                    :
+                    <Button floating onClick={this.loadNoteForm} className='red lighten-2 light-blue-text' waves='light' icon='add' />
+                  }
               </Card>
             </Col>
           )}
