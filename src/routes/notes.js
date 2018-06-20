@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const knex = require("./database-connection");
+const knex = require("../../database-connection");
 
 router.post("/", (req, res, next) => {
   return knex("note")
