@@ -44,7 +44,7 @@ const notes = [
 ]
 exports.seed = function(knex, Promise) {
   // Deletes ALL existing entries
-  return knex.raw('DELETE FROM "note"; ALTER SEQUENCE note_id_seq RESTART WITH 4;')
+  return knex.raw('DELETE FROM "note"; ALTER SEQUENCE note_id_seq RESTART WITH 7;')
     .then(function () {
       // Inserts seed entries
       return knex('note').insert(notes);

@@ -98,7 +98,27 @@ class SingleTrip extends React.Component {
       });
   }
   handleNote = event => {
-
+    this.setState({[event.target.name]: event.target.value})
+  }
+  postNote = (e) => {
+    e.preventDefault();
+    let note = {
+      trip_id: this.state.trip.id,
+      type: this.state.newNote.type,
+      name: this.state.newNote.name,
+      note: this.state.newNote.note
+    };
+    return fetch("https://warm-atoll-11937.herokuapp.com/api/notes", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json"
+      },
+      body: JSON.stringify(note)
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log("success");
+      });
   }
   render() {
     return (
@@ -202,9 +222,9 @@ class SingleTrip extends React.Component {
                     this.state.noteForm
                     ?
                     <Row>
-                        <Input name="type" value={this.state.newNote.type} placeholder="ex. Restaurant" s={6} label="Type" />
-                        <Input name="name" value={this.state.newNote.name} s={6} label="Place Name" />
-                        <Input s={12} value={this.state.newNote.note} name="note" label="Enter place note here" />
+                        <Input name="type" defaultValue={this.state.newNote.type} placeholder="ex. Restaurant" s={6} label="Type" />
+                        <Input name="name" defaultValue={this.state.newNote.name} s={6} label="Place Name" />
+                        <Input s={12} defaultValue={this.state.newNote.note} name="note" label="Enter place note here" />
                         <Button floating className='red lighten-2 light-blue-text' waves='light' icon='add' onClick={this.postNote}/>
                     </Row>
                     :
