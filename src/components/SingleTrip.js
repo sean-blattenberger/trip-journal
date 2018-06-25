@@ -43,8 +43,8 @@ class SingleTrip extends React.Component {
     this.setState({ updateForm: formStatus });
   };
   loadNoteForm = () => {
-    this.setState({ noteForm: true })
-  }
+    this.setState({ noteForm: true });
+  };
   getSingleTrip = () => {
     let url = window.location.href.split("/");
     fetch(`${baseUrl}trips/${url[url.length - 1]}`)
@@ -54,20 +54,18 @@ class SingleTrip extends React.Component {
       });
   };
   deleteTrip = () => {
-    fetch(`${baseUrl}${this.state.trip.id}`, {
+    fetch(`${baseUrl}trips/${this.state.trip.id}`, {
       method: "DELETE"
     })
       .then(res => res.json())
       .catch(error => console.error("Error:", error))
       .then(response => {
         console.log("Success:", response);
-        window.location =
-          "http://localhost:3000/" || "https://warm-atoll-11937.herokuapp.com/";
+        this.props.history.push('/')
       });
   };
   updateTrip = event => {
     event.preventDefault();
-    console.log(this.state.trip);
     fetch(`${baseUrl}${this.state.trip.id}`, {
       method: "PUT",
       body: JSON.stringify(this.state.trip),
@@ -86,7 +84,7 @@ class SingleTrip extends React.Component {
     newTrip[event.target.name] = event.target.value;
     this.setState({ trip: newTrip });
   };
-  deleteNote = (id) => {
+  deleteNote = id => {
     return fetch(`${baseUrl}notes/${id}`, {
       method: "DELETE"
     })
@@ -96,11 +94,16 @@ class SingleTrip extends React.Component {
         console.log("Success:", response);
         this.getSingleTrip();
       });
-  }
+  };
   handleNote = event => {
-    this.setState({[event.target.name]: event.target.value})
-  }
-  postNote = (e) => {
+    this.setState({
+      newNote: {
+        ...this.state.newNote,
+        [event.target.name]: event.target.value
+      }
+    });
+  };
+  postNote = e => {
     e.preventDefault();
     let note = {
       trip_id: this.state.trip.id,
@@ -118,8 +121,10 @@ class SingleTrip extends React.Component {
       .then(res => res.json())
       .then(data => {
         console.log("success");
+        this.getSingleTrip();
+        this.setState({ noteForm: false });
       });
-  }
+  };
   render() {
     return (
       <React.Fragment>
@@ -151,19 +156,12 @@ class SingleTrip extends React.Component {
                   label="Date"
                   placeholder="xx/xx/xxxx"
                 />
-                <Input
-                  onChange={this.handleChange}
-                  name="notes"
-                  defaultValue={this.state.trip.notes.map(note => " " + note.note)}
-                  label="Notes"
-                  s={12}
-                />
                 <Button
                   type="submit"
                   className="blue-grey darken-4 white-text"
                   onClick={this.updateTrip}
                 >
-                  Update Trip
+                  Update Trip Info
                 </Button>
                 <Button className="red white-text" onClick={this.toggleForm}>
                   Cancel
@@ -195,7 +193,7 @@ class SingleTrip extends React.Component {
                     waves="light"
                   >
                     <Icon right>create</Icon>
-                    Update Trip
+                    Update Trip Info
                   </Button>
                 ]}
               >
@@ -211,25 +209,58 @@ class SingleTrip extends React.Component {
                           singleNote.type
                         }:  ${singleNote.name}`}</div>
                         <p className="white-text thin">{singleNote.note}</p>
-                        <div className="right" onClick={() => this.deleteNote(singleNote.id)} style={{"margin-top": "-40px"}}>
+                        <div
+                          className="right"
+                          onClick={() => this.deleteNote(singleNote.id)}
+                          style={{ "margin-top": "-40px" }}
+                        >
                           <Icon right>delete</Icon>
                         </div>
                       </CollectionItem>
                     );
                   })}
-                  </Collection>
-                  {
-                    this.state.noteForm
-                    ?
-                    <Row>
-                        <Input name="type" defaultValue={this.state.newNote.type} placeholder="ex. Restaurant" s={6} label="Type" />
-                        <Input name="name" defaultValue={this.state.newNote.name} s={6} label="Place Name" />
-                        <Input s={12} defaultValue={this.state.newNote.note} name="note" label="Enter place note here" />
-                        <Button floating className='red lighten-2 light-blue-text' waves='light' icon='add' onClick={this.postNote}/>
-                    </Row>
-                    :
-                    <Button floating onClick={this.loadNoteForm} className='red lighten-2 light-blue-text' waves='light' icon='add' />
-                  }
+                </Collection>
+                {this.state.noteForm ? (
+                  <Row>
+                    <Input
+                      name="type"
+                      defaultValue={this.state.newNote.type}
+                      onChange={this.handleNote}
+                      placeholder="ex. Restaurant"
+                      s={6}
+                      label="Type"
+                    />
+                    <Input
+                      name="name"
+                      defaultValue={this.state.newNote.name}
+                      onChange={this.handleNote}
+                      s={6}
+                      label="Place Name"
+                    />
+                    <Input
+                      s={12}
+                      defaultValue={this.state.newNote.note}
+                      onChange={this.handleNote}
+                      name="note"
+                      label="Enter place note here"
+                    />
+                    <Button
+                      floating
+                      className="red lighten-2 light-blue-text"
+                      waves="light"
+                      icon="add"
+                      onClick={this.postNote}
+                    />
+                  </Row>
+                ) : (
+                  <Button
+                    floating
+                    onClick={this.loadNoteForm}
+                    className="red lighten-2 light-blue-text"
+                    waves="light"
+                    icon="add"
+                  />
+                )}
               </Card>
             </Col>
           )}
