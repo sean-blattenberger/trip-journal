@@ -1,7 +1,7 @@
 # :mountain_railway: TravelJournal :notebook:
 
 
-TravelJournal is simple CRUD app that allows user to keep record of their travels.
+TravelJournal is simple CRUD app that allows users to keep record of their travels.
 
 
 ## Technologies used
