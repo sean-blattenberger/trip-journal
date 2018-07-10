@@ -44,9 +44,10 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Header />
+        <Header/>
         <div className="card-container">
           <TravelCards
+            className="travel-cards"
             updateCurrentTrip={this.updateCurrentTrip}
             trips={this.state.trips}
           />

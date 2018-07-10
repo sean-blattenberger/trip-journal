@@ -23,7 +23,10 @@
     "start": "nodemon src/server.js",
     "dev": "watch -n 10 'npm run build'",
     "build": "react-scripts build",
-    "test": "react-scripts start",
+    "test": "npx cypress open",
     "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "cypress": "^3.0.2"
   }
 }
