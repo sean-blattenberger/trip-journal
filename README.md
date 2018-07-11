@@ -3,6 +3,7 @@
 
 TravelJournal is simple CRUD app that allows users to keep record of their travels.
 
+![](tjdemo.png)
 
 ## Technologies used
 * HTML5
@@ -25,3 +26,9 @@ TravelJournal is simple CRUD app that allows users to keep record of their trave
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 Thanks for checking out my project!
+
+
+
+| Author             | Title         | Location   |
+| ------------------ |:-------------:| ----------:|
+| Sean Blattenberger | Web Developer | Denver, CO |
