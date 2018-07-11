@@ -3,7 +3,7 @@
 
 TravelJournal is simple CRUD app that allows users to keep record of their travels.
 
-![](tjdemo.png)
+![](tjprodemo.png)
 
 ## Technologies used
 * HTML5
