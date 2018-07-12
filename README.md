@@ -17,7 +17,7 @@ TravelJournal is simple CRUD app that allows users to keep record of their trave
 * Heroku
 ### Live link
 
-[TripJournal Live Demo](https://warm-atoll-11937.herokuapp.com/)
+[TripJournal Live Demo](https://my-travel-journal.herokuapp.com/)
 
 
 

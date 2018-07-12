@@ -15,7 +15,7 @@ class App extends Component {
     this.readData();
   }
   readData = () => {
-    fetch("https://warm-atoll-11937.herokuapp.com/api/trips")
+    fetch("https://my-travel-journal.herokuapp.com/api/trips")
       .then(res => res.json())
       .then(trips => {
         this.setState({ trips });
@@ -28,7 +28,7 @@ class App extends Component {
       date: newTrip.date,
       notes: newTrip.notes
     };
-    return fetch("https://warm-atoll-11937.herokuapp.com/api/trips", {
+    return fetch("https://my-travel-journal.herokuapp.com/api/trips", {
       method: "POST",
       headers: {
         "content-type": "application/json"

@@ -10,7 +10,7 @@ import {
   CollectionItem
 } from "react-materialize";
 import Header from "./Navbar/Header";
-const baseUrl = `https://warm-atoll-11937.herokuapp.com/api/`;
+const baseUrl = `https://my-travel-journal.herokuapp.com/api/`;
 class SingleTrip extends React.Component {
   state = {
     trip: {
@@ -111,7 +111,7 @@ class SingleTrip extends React.Component {
       name: this.state.newNote.name,
       note: this.state.newNote.note
     };
-    return fetch("https://warm-atoll-11937.herokuapp.com/api/notes", {
+    return fetch("https://my-travel-journal.herokuapp.com/api/notes", {
       method: "POST",
       headers: {
         "content-type": "application/json"
