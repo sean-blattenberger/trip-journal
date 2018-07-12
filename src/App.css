@@ -79,3 +79,29 @@ div.note-header {
     margin: 0 5rem 0 5rem;
   }
 }
+.modal {
+  background-color: #263238 !important;
+}
+.modal > * {
+  background-color: #263238 !important;
+}
+.modal-content > h4 {
+  border-bottom: 1px solid rgba(160,160,160,0.2);
+  width: 100%;
+}
+.modal-content > p {
+  padding: 10px;
+  font-size: 18px;
+}
+
+.modal-footer {
+  border-top: 1px solid rgba(160,160,160,0.2);
+}
+
+.modal-footer > .btn {
+  background-color: #03a9f4;
+}
+
+.trash {
+  cursor: pointer;
+}

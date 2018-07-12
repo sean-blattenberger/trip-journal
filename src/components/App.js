@@ -4,6 +4,8 @@ import { Row } from "react-materialize";
 import Header from "./Navbar/Header";
 import CollapseForm from "./CollapseForm";
 import TravelCards from "./TravelCards";
+import About from "./About";
+
 
 class App extends Component {
   state = {
@@ -45,6 +47,9 @@ class App extends Component {
     return (
       <div className="App">
         <Header/>
+        <div className="card-container">
+          <About/>
+        </div>
         <div className="card-container">
           <TravelCards
             className="travel-cards"

@@ -214,7 +214,7 @@ class SingleTrip extends React.Component {
                           onClick={() => this.deleteNote(singleNote.id)}
                           style={{ "margin-top": "-40px" }}
                         >
-                          <Icon right>delete</Icon>
+                          <Icon className="trash" right>delete</Icon>
                         </div>
                       </CollectionItem>
                     );

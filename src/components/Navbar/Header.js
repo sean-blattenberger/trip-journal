@@ -5,32 +5,31 @@ import { Navbar, NavItem, Icon } from "react-materialize";
 
 const Header = () => {
   return (
-    <div className="navbar-fixed">
-      <Navbar
-        className="navbar-fixed blue-grey darken-4"
-        brand={
-          <LogoIcon>
-            <Icon className="red-text text-lighten-2">card_travel</Icon>
-          </LogoIcon>
-        }
-        right
-      >
-        <NavItem>
-          <Icon className="light-blue-text">search</Icon>
-        </NavItem>
-        <NavItem>
-          <Link to="/">
-            <Icon className="light-blue-text">view_module</Icon>
-          </Link>
-        </NavItem>
-        <NavItem onClick={() => window.location.reload()}>
-          <Icon className="light-blue-text">refresh</Icon>
-        </NavItem>
-        <NavItem>
-          <Icon className="light-blue-text">more_vert</Icon>
-        </NavItem>
-      </Navbar>
-    </div>
+    <React.Fragment>
+      <div className="navbar-fixed">
+        <Navbar
+          className="navbar-fixed blue-grey darken-4"
+          brand={
+            <LogoIcon>
+              <Icon className="red-text text-lighten-2">card_travel</Icon>
+            </LogoIcon>
+          }
+          right
+        >
+          <NavItem>
+            <Link to="/">
+              <Icon className="light-blue-text">view_module</Icon>
+            </Link>
+          </NavItem>
+          <NavItem onClick={() => window.location.reload()}>
+            <Icon className="light-blue-text">refresh</Icon>
+          </NavItem>
+          <NavItem>
+            <Icon className="light-blue-text">info</Icon>
+          </NavItem>
+        </Navbar>
+      </div>
+    </React.Fragment>
   );
 };
 
